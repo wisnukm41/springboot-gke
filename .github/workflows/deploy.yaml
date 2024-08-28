@@ -38,8 +38,8 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker tag quickstart:${{ github.ref_name }} wisnukm/quickstart:${{ github.ref_name }}
-          docker push wisnukm/quickstart:${{ github.ref_name }}
+          docker tag quickstart:${{ github.ref_name }} ${{ secrets.DOCKER_HUB_USERNAME }}/quickstart:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/quickstart:${{ github.ref_name }}
 
   deploy:
     name: Deploy to GKE
@@ -61,5 +61,5 @@ jobs:
 
       - name: Apply Kubernetes configuration
         run: |
-          sed -i 's|<IMAGE_TAG>|wisnukm/quickstart:${{ github.ref_name }}|g' k8s/springboot-deployment.yaml
+          sed -i 's|<IMAGE_TAG>|${{ secrets.DOCKER_HUB_USERNAME }}/quickstart:${{ github.ref_name }}|g' k8s/springboot-deployment.yaml
           kubectl apply -f k8s/springboot-deployment.yaml

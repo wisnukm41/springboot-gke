@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     name: Build, Test, and Push Docker Image
+    environment: deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -46,6 +47,7 @@ jobs:
   deploy:
     name: Deploy to GKE
     runs-on: ubuntu-latest
+    environment: deploy
     needs: build
     steps:
       - name: Checkout code

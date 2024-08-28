@@ -21,7 +21,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Make mvnw executable
-        run: chmod +x ./mvnw
+        run: |
+          chmod +x ./mvnw
+          echo ${{ secrets.DOCKER_HUB_USERNAME }}
 
       - name: Build JAR file
         run: ./mvnw clean package -DskipTests

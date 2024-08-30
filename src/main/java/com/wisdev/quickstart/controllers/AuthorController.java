@@ -56,7 +56,7 @@ public class AuthorController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ResponseEntity<String> index(){
-        String msg = "Hello v2";
+        String msg = "Hello v3";
         return ResponseEntity.ok(msg);
     }
 }
